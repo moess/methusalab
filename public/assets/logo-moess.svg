@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129.3 29.5">
+  
+  <defs>
+    
+    <clipPath id="clippath">
+      <rect class="st0" x="0" y="0" width="129.3" height="29.5"></rect>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="st0" width="129.3" height="29.5"></rect>
+    </clipPath>
+  </defs>
+  <g class="st2">
+    <g class="st1">
+      <image width="270" height="62" transform="scale(.5)" xlink:href="logo-moess-1.png"></image>
+    </g>
+  </g>
+</svg>
