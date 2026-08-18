@@ -1,70 +1,5 @@
 @import "tailwindcss";
 
-/* ── Brockmann font family ── */
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-regular-webfont.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-regularitalic-webfont.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-medium-webfont.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-mediumitalic-webfont.woff2') format('woff2');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-semibold-webfont.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-semibolditalic-webfont.woff2') format('woff2');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-bold-webfont.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Brockmann';
-  src: url('/fonts/brockmann-bolditalic-webfont.woff2') format('woff2');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
 :root {
   /* Neutrals */
   --paper: #F5F0EB;
@@ -118,7 +53,7 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
@@ -210,7 +145,7 @@ img {
 }
 
 .rail .bolt .bolt-label {
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 8px;
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -381,7 +316,7 @@ body.menu-open .overlay {
   height: 40px;
   padding: 0 20px;
   border-radius: 999px;
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-sans), sans-serif;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -596,7 +531,7 @@ header.hero {
 }
 
 .hc-wordmark {
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -625,7 +560,7 @@ header.hero {
 }
 
 .hc-claim {
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: clamp(14px, 1.4vw, 18px);
   line-height: 1.55;
   color: rgba(245, 240, 235, 0.65);
@@ -635,7 +570,7 @@ header.hero {
 }
 
 .hc-tags {
-  font-family: 'Brockmann', system-ui, sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -1194,122 +1129,6 @@ section#clients {
   letter-spacing: 0.02em;
 }
 
-/* ── SERVICES GRID ── */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-}
-
-.scard {
-  position: relative;
-  background: rgba(26, 23, 22, 0.05);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--line-soft);
-  border-radius: 20px;
-  padding: 38px 34px 34px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  transition: transform 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
-  overflow: hidden;
-}
-
-.scard::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--lcard-grad, linear-gradient(90deg, var(--royal), var(--vivid)));
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
-}
-
-.scard:hover::before {
-  opacity: 1;
-}
-
-.scard:hover {
-  transform: translateY(-5px);
-  background: rgba(26, 23, 22, 0.03);
-  border-color: var(--line);
-  box-shadow: 0 8px 32px -8px rgba(168, 108, 244, 0.18);
-}
-
-.scard-head {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.scard-badge {
-  display: inline-block;
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: rgba(122, 68, 212, 0.08);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--vivid);
-  letter-spacing: 0.02em;
-}
-
-.scard h3 {
-  font-size: clamp(22px, 2.2vw, 28px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
-
-.scard-intro {
-  font-size: 16px;
-  color: var(--ink-soft);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-.scard-points {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 8px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line-soft);
-}
-
-.scard-points li {
-  font-size: 15px;
-  color: var(--ink-soft);
-  line-height: 1.55;
-  padding-left: 18px;
-  position: relative;
-}
-
-.scard-points li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--vivid);
-  opacity: 0.45;
-}
-
-.scard-points li strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-@media (max-width: 900px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ── CHECK LIST ── */
 .check-list {
   list-style: none;
@@ -1798,27 +1617,6 @@ section#clients {
     font-size: clamp(19px, 2vw, 24px);
   }
 
-  /* Services */
-  .services-grid {
-    gap: 22px;
-  }
-
-  .scard {
-    padding: 32px 28px 28px;
-  }
-
-  .scard h3 {
-    font-size: clamp(20px, 2vw, 24px);
-  }
-
-  .scard-intro {
-    font-size: 15px;
-  }
-
-  .scard-points li {
-    font-size: 14px;
-  }
-
   /* Leistungen */
   .leist-grid {
     gap: 18px;
@@ -2158,42 +1956,6 @@ section#clients {
     height: 18px;
   }
 
-  /* ── Services ── */
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .scard {
-    padding: 26px 22px 24px;
-    border-radius: 16px;
-    gap: 10px;
-  }
-
-  .scard h3 {
-    font-size: 20px;
-  }
-
-  .scard-intro {
-    font-size: 14px;
-  }
-
-  .scard-points {
-    gap: 12px;
-    margin-top: 4px;
-    padding-top: 12px;
-  }
-
-  .scard-points li {
-    font-size: 14px;
-    padding-left: 16px;
-  }
-
-  .scard-badge {
-    font-size: 11px;
-    padding: 2px 10px;
-  }
-
   /* ── Leistungen ── */
   .leist-grid {
     grid-template-columns: 1fr;
@@ -2445,18 +2207,6 @@ section#clients {
 
   .aud-wrap .big {
     font-size: 21px;
-  }
-
-  .scard {
-    padding: 22px 18px 20px;
-  }
-
-  .scard h3 {
-    font-size: 18px;
-  }
-
-  .scard-points li {
-    font-size: 13px;
   }
 
   .lcard h3 {
