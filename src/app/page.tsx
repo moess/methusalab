@@ -394,7 +394,6 @@ export default function Home() {
         <div className="ov-foot">
           <span>METHUSALAB</span>
           <a href="mailto:kontakt@methusalab.de">kontakt@methusalab.de</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </nav>
 
@@ -682,7 +681,6 @@ export default function Home() {
               <div className="r">
                 <span>&copy; 2026</span>
                 <a href="mailto:kontakt@methusalab.de">kontakt@methusalab.de</a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
               </div>
             </div>
           </div>
