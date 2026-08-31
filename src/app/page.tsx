@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
+
+const TIME_OPTIONS = ["09:00–09:30", "10:00–10:30", "11:00–11:30", "14:00–14:30", "15:00–15:30", "16:00–16:30"];
 
 const NUTZEN_ITEMS = [
   {
@@ -56,15 +58,15 @@ const LEISTUNGEN = [
   },
   {
     num: "03",
-    title: "Workflows entlasten",
-    desc: "Bestehende Prozesse analysieren und zeigen, wo Arbeit reduziert, Inhalte strukturiert und Abläufe beschleunigt werden können.",
-    results: ["Workflow-Analyse", "Automatisierungskonzepte", "Content-Logik", "Prozessmodelle", "Qualitätssicherung"],
+    title: "Workflows mit KI entlasten",
+    desc: "Bestehende Prozesse analysieren und mit KI-Unterstützung beschleunigen — von Recherche und Content-Erstellung bis zu Freigaben und Übergaben.",
+    results: ["Workflow-Analyse", "KI-Automatisierung", "Multi-Agenten-Systeme", "Content-Logik", "Qualitätssicherung"],
   },
   {
     num: "04",
     title: "Systeme planbar machen",
-    desc: "Datenflüsse, Rollen, Schnittstellen, Toolchains und Betriebslogik klar konzipieren.",
-    results: ["Systemarchitektur", "Datenmodelle", "Schnittstellen", "Toolchain-Logik", "Governance"],
+    desc: "Datenflüsse, Rollen, Schnittstellen, Toolchains und Betriebslogik klar konzipieren — inklusive DSGVO-konformer KI-Einbindung.",
+    results: ["Systemarchitektur", "Datenmodelle", "Schnittstellen", "DSGVO & Governance", "Toolchain-Logik"],
   },
   {
     num: "05",
@@ -107,7 +109,7 @@ const PROCESS_STEPS = [
   { num: "01", title: "Verstehen", desc: "Wir analysieren Ziele, Nutzerbedürfnisse, Prozesse, Inhalte, Datenquellen, Tools und technische Rahmenbedingungen. Dadurch wird sichtbar, wo neue Systeme echten Nutzen stiften und wo zuerst Struktur geschaffen werden muss." },
   { num: "02", title: "Ordnen", desc: "Wir definieren sinnvolle Anwendungen, priorisieren nach Wirkung und Umsetzbarkeit und reduzieren Komplexität. So entstehen klare Entscheidungen statt endloser Optionen." },
   { num: "03", title: "Konzipieren", desc: "Wir übersetzen Anforderungen in Produktlogik, Nutzerflüsse, Workflows, Datenmodelle und Systemarchitektur. So entsteht ein System, das verständlich, nützlich und realistisch umsetzbar ist." },
-  { num: "04", title: "Sichtbar machen", desc: "Mit Figma-Prototypen, Prozessmodellen, Journey Maps, Systemdiagrammen oder technischen Proofs of Concept machen wir Ideen überprüfbar. So können Teams und Stakeholder früh erkennen, was trägt." },
+  { num: "04", title: "Sichtbar machen", desc: "Mit Prototypen — vom Figma-Klickdummy bis zum funktionierenden Code — User-Tests, Prozessmodellen, Journey Maps oder Systemdiagrammen machen wir Ideen überprüfbar. So können Teams, Stakeholder und echte Nutzer früh erkennen, was trägt." },
   { num: "05", title: "Planen", desc: "Wir übersetzen das Konzept in Prioritäten, MVP-Schnitt, technische Abhängigkeiten, Rollen, Umsetzungsphasen und offene Entscheidungen. So wird aus Strategie ein handlungsfähiger Plan." },
   { num: "06", title: "Übergeben oder umsetzen", desc: "Wir dokumentieren Konzepte so, dass interne Teams, externe Entwickler oder Technologiepartner direkt weiterarbeiten können. Wenn gewünscht, übernimmt METHUSALAB auch die weitere Entwicklung und Einführung." },
 ];
@@ -157,7 +159,130 @@ function ChevronRight() {
   );
 }
 
+function AppointmentModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const minDate = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    const fd = new FormData(e.currentTarget);
+    const slots = [
+      { date: String(fd.get("date1") ?? ""), time: String(fd.get("time1") ?? "") },
+      { date: String(fd.get("date2") ?? ""), time: String(fd.get("time2") ?? "") },
+    ].filter((s) => s.date);
+    if (slots.length === 0) {
+      setError("Bitte wählen Sie mindestens einen Terminvorschlag.");
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/analyse-anfrage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          email: fd.get("email"),
+          slots,
+          message: fd.get("message"),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Unbekannter Fehler");
+      setStatus("done");
+    } catch (err) {
+      setStatus("idle");
+      setError(err instanceof Error ? err.message : "Die Anfrage konnte nicht gesendet werden.");
+    }
+  };
+
+  return (
+    <div className="am-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label="Kostenloses Analysegespräch vereinbaren">
+      <div className="am-panel" onClick={(e) => e.stopPropagation()}>
+        <button className="am-close" onClick={onClose} aria-label="Schließen">✕</button>
+        {status === "done" ? (
+          <div className="am-done">
+            <span className="am-eyebrow">Anfrage gesendet</span>
+            <h3>Vielen Dank!</h3>
+            <p>Wir melden uns innerhalb eines Werktags per E-Mail und bestätigen einen Ihrer Terminvorschläge.</p>
+            <button className="btn orange" onClick={onClose}>Schließen</button>
+          </div>
+        ) : (
+          <>
+            <span className="am-eyebrow">Kostenloses Analysegespräch</span>
+            <h3>Wann passt es Ihnen?</h3>
+            <p className="am-sub">30 Minuten, unverbindlich. Schlagen Sie bis zu zwei Termine vor — wir bestätigen per E-Mail.</p>
+            <form onSubmit={submit}>
+              <div className="am-row">
+                <label>
+                  Name
+                  <input name="name" type="text" required minLength={2} maxLength={120} autoComplete="name" />
+                </label>
+                <label>
+                  E-Mail
+                  <input name="email" type="email" required maxLength={200} autoComplete="email" />
+                </label>
+              </div>
+              <div className="am-row">
+                <label>
+                  Terminvorschlag 1
+                  <input name="date1" type="date" required min={minDate} />
+                </label>
+                <label>
+                  Uhrzeit
+                  <select name="time1" defaultValue={TIME_OPTIONS[1]}>
+                    {TIME_OPTIONS.map((t) => <option key={t}>{t}</option>)}
+                  </select>
+                </label>
+              </div>
+              <div className="am-row">
+                <label>
+                  Terminvorschlag 2 <span className="am-opt">(optional)</span>
+                  <input name="date2" type="date" min={minDate} />
+                </label>
+                <label>
+                  Uhrzeit
+                  <select name="time2" defaultValue={TIME_OPTIONS[3]}>
+                    {TIME_OPTIONS.map((t) => <option key={t}>{t}</option>)}
+                  </select>
+                </label>
+              </div>
+              <label>
+                Worum geht es? <span className="am-opt">(optional)</span>
+                <textarea name="message" rows={3} maxLength={2000} placeholder="Kurz: Ausgangslage oder Ziel" />
+              </label>
+              {error && <p className="am-error" role="alert">{error}</p>}
+              <button type="submit" className="btn orange am-submit" disabled={status === "sending"}>
+                {status === "sending" ? "Wird gesendet …" : "Terminvorschläge senden"} <ArrowIcon />
+              </button>
+              <p className="am-note">Kein Newsletter, keine Weitergabe. Nur die Terminabstimmung.</p>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -389,6 +514,7 @@ export default function Home() {
       <nav className="overlay" id="overlay">
         <a href="#nutzen" className="serif" onClick={closeMenu}>Nutzen</a>
         <a href="#leistungen" className="serif" onClick={closeMenu}>Leistungen</a>
+        <a href="#usecase" className="serif" onClick={closeMenu}>Use Case</a>
         <a href="#arbeitsweise" className="serif" onClick={closeMenu}>Arbeitsweise</a>
         <a href="#contact" className="serif" onClick={closeMenu}>Kontakt</a>
         <div className="ov-foot">
@@ -432,11 +558,11 @@ export default function Home() {
             <div className="hc-divider" />
             <h1 className="hc-name">Ihre Prozesse werden klarer, schneller und leichter nutzbar</h1>
             <p className="hc-claim">METHUSALAB entwickelt digitale Produkt- und Workflow-Systeme, die Teams im Alltag entlasten, wiederkehrende Arbeit reduzieren und aus komplexen Abläufen nutzbare Lösungen machen.</p>
-            <p className="hc-tags">Konzeption · UX · Workflows · Automatisierung · Plattformlogik</p>
+            <p className="hc-tags">Konzeption · UX · Workflows · KI-Automatisierung · Plattformlogik</p>
             <div className="hc-cta">
-              <a href="#contact" className="btn hero-btn-primary">
-                <ArrowIcon /> Projekt anfragen
-              </a>
+              <button className="btn hero-btn-primary" onClick={() => setModalOpen(true)}>
+                <ArrowIcon /> Kostenloses Analysegespräch
+              </button>
               <a href="#arbeitsweise" className="btn hero-btn-ghost">Arbeitsweise ansehen</a>
             </div>
           </div>
@@ -507,7 +633,7 @@ export default function Home() {
             </p>
             <div className="body" data-reveal="" style={{ "--d": 1 } as React.CSSProperties}>
               <p>Unser Fokus liegt auf Produkten, Plattformen, Content-Systemen und Workflows, bei denen viele Informationen, Rollen, Tools und Entscheidungen zusammenkommen. Genau dort entsteht oft Reibung. Und genau dort lassen sich mit guter Konzeption, Automatisierung und intelligenter Systemlogik spürbare Verbesserungen erreichen.</p>
-              <p>Wir verbinden Konzeption, UX, Automatisierung, Systemarchitektur und Entwicklung. Dadurch entstehen Lösungen, die nicht nur strategisch sinnvoll, sondern auch praktisch anschlussfähig sind.</p>
+              <p>Wir verbinden Konzeption, UX, KI-Automatisierung, Systemarchitektur und Entwicklung. Dadurch entstehen Lösungen, die nicht nur strategisch sinnvoll, sondern auch praktisch anschlussfähig sind — und bei denen KI dort eingesetzt wird, wo sie nachweisbar entlastet.</p>
             </div>
           </div>
         </div>
@@ -603,6 +729,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* USE CASE */}
+      <section id="usecase">
+        <div className="wrap">
+          <div className="sec-head">
+            <span className="eyebrow">Use Case</span>
+            <h2 className="serif">KI-Redaktionssystem <span className="hl-pill">im Einsatz</span></h2>
+          </div>
+          <div className="case-panel" data-reveal="">
+            <div className="case-main">
+              <span className="case-badge">Publishing · KI-Automatisierung</span>
+              <h3>Automatisierte Content-Produktion für einen deutschen Verlag</h3>
+              <p>Für einen Verlagskunden hat METHUSALAB ein KI-gestütztes Redaktionssystem entwickelt: Aus einem Briefing entsteht über eine Pipeline spezialisierter KI-Agenten ein recherchierter, im Haus-Stil geschriebener Artikelentwurf — inklusive Qualitätsprüfung gegen die redaktionellen Kriterien des Verlags.</p>
+              <p>Die Redaktion behält dabei die Kontrolle: Jeder Text durchläuft ein Review-Dashboard, wird redaktionell geprüft und erst nach Freigabe ins CMS übergeben. Das System ersetzt keine Redakteur:innen — es nimmt ihnen die zeitraubende Vorarbeit ab.</p>
+              <p className="case-result">Der Kernkreislauf läuft produktiv: von Briefing über Pipeline und Review bis zum publizierten Artikel — end-to-end.</p>
+            </div>
+            <div className="case-side">
+              <span className="case-side-label">So funktioniert es</span>
+              <ol className="case-steps">
+                <li><b>Briefing</b>Thema, Ziel und Rahmen kommen aus der Redaktion</li>
+                <li><b>Agenten-Pipeline</b>Spezialisierte KI-Rollen recherchieren, strukturieren, schreiben und prüfen</li>
+                <li><b>Human Review</b>Die Redaktion prüft, korrigiert und gibt frei</li>
+                <li><b>Publikation</b>Übergabe ans CMS als fertiger Entwurf</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="sec-divider" />
+
       {/* ARBEITSWEISE */}
       <section id="arbeitsweise">
         <div className="wrap">
@@ -661,12 +817,12 @@ export default function Home() {
           <div className="wrap">
             <h2 className="serif" data-reveal="">Ihre digitalen Systeme sollen Arbeit erleichtern?</h2>
             <p className="finale-sub" data-reveal="" style={{ "--d": 1 } as React.CSSProperties}>
-              METHUSALAB entwickelt mit Ihnen die Struktur, damit aus Ideen, Tools und Prozessen ein nutzbares System wird. Auf Wunsch übernehmen wir auch die Umsetzung.
+              Vereinbaren Sie ein kostenloses Analysegespräch: Wir schauen gemeinsam auf Ihre Prozesse und zeigen Ihnen, wo Struktur, KI und Automatisierung den größten Hebel haben — unverbindlich und konkret.
             </p>
             <div className="finale-cta" data-reveal="" style={{ "--d": 2 } as React.CSSProperties}>
-              <a href="mailto:kontakt@methusalab.de" className="btn orange">
-                Projekt starten <ArrowIcon />
-              </a>
+              <button className="btn orange" onClick={() => setModalOpen(true)}>
+                Kostenloses Analysegespräch <ArrowIcon />
+              </button>
             </div>
           </div>
         </div>
@@ -686,6 +842,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <AppointmentModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }
