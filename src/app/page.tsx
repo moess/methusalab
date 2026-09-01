@@ -126,6 +126,40 @@ const AUDIENCE_CHECKS = [
 
 const AUDIENCE_CHIPS = ["Unternehmen", "Agenturen", "Verlage", "Content-Teams", "Plattformbetreiber"];
 
+// Rollen und Beschreibungen sind vorläufig — bitte prüfen und anpassen
+const TEAM = [
+  {
+    photo: "/assets/team/norbert_fogarasi.webp",
+    name: "Norbert Fogarasi",
+    role: "Entwicklung & Architektur",
+    desc: "Verantwortet Systemarchitektur, Schnittstellen und saubere Umsetzung.",
+  },
+  {
+    photo: "/assets/team/laszlo_kocsis.webp",
+    name: "Laszlo Kocsis",
+    role: "UX & Interface Design",
+    desc: "Gestaltet Nutzerführung und Oberflächen, die Komplexität reduzieren.",
+  },
+  {
+    photo: "/assets/team/kalman_takacs.webp",
+    name: "Kalman Takacs",
+    role: "KI-Engineering",
+    desc: "Baut Agenten-Pipelines, LLM-Integrationen und Automatisierungen.",
+  },
+  {
+    photo: "/assets/team/zsolt_dongolo.webp",
+    name: "Zsolt Dongolo",
+    role: "Entwicklung",
+    desc: "Setzt Produkte und Automatisierungen zuverlässig um — vom Prototyp bis zum Betrieb.",
+  },
+  {
+    photo: "/assets/team/oszkar_kovacs.webp",
+    name: "Oszkar Kovacs",
+    role: "Projektleitung",
+    desc: "Hält Ziele, Zeitpläne und Kommunikation zusammen — vom Kickoff bis zur Einführung.",
+  },
+];
+
 const ZUSAMMENARBEIT = [
   "Strategischer Sparringspartner",
   "Konzeptions- und UX-Team",
@@ -516,11 +550,8 @@ export default function Home() {
         <a href="#leistungen" className="serif" onClick={closeMenu}>Leistungen</a>
         <a href="#usecase" className="serif" onClick={closeMenu}>Use Case</a>
         <a href="#arbeitsweise" className="serif" onClick={closeMenu}>Arbeitsweise</a>
+        <a href="#team" className="serif" onClick={closeMenu}>Team</a>
         <a href="#contact" className="serif" onClick={closeMenu}>Kontakt</a>
-        <div className="ov-foot">
-          <span>METHUSALAB</span>
-          <a href="mailto:kontakt@methusalab.de">kontakt@methusalab.de</a>
-        </div>
       </nav>
 
       {/* HERO */}
@@ -808,6 +839,28 @@ export default function Home() {
         </div>
       </section>
 
+      <hr className="sec-divider" />
+
+      {/* TEAM */}
+      <section id="team">
+        <div className="wrap">
+          <div className="sec-head">
+            <span className="eyebrow">Team</span>
+            <h2 className="serif">Die Menschen <span className="hl-pill">dahinter</span></h2>
+          </div>
+          <div className="team-grid">
+            {TEAM.map((t, i) => (
+              <div className="tcard" key={i} data-reveal="" style={{ "--d": i } as React.CSSProperties}>
+                <img className="tcard-photo" src={t.photo} alt={t.name} loading="lazy" width={720} height={720} />
+                <h3>{t.name}</h3>
+                <span className="tcard-role">{t.role}</span>
+                <p>{t.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA + FOOTER */}
       <footer className="finale" id="contact">
         {/* Gradient orb — rising sun */}
@@ -839,6 +892,12 @@ export default function Home() {
                 <a href="mailto:kontakt@methusalab.de">kontakt@methusalab.de</a>
               </div>
             </div>
+            <address className="foot-address">
+              methusalab by Kadeno Solutions SRL<br />
+              Str. Lalelelor 32<br />
+              540437 Târgu Mureș, Jud. Mureș<br />
+              Rumänien
+            </address>
           </div>
         </div>
       </footer>

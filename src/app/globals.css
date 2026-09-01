@@ -2600,3 +2600,103 @@ section#clients {
     grid-template-columns: 1fr;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   TEAM
+   ═══════════════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.tcard {
+  background: rgba(26, 23, 22, 0.04);
+  border: 1px solid var(--line-soft);
+  border-radius: 18px;
+  padding: 30px 26px;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.tcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--line);
+  box-shadow: 0 6px 24px -6px rgba(168, 108, 244, 0.14);
+}
+
+.tcard-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.tcard h3 {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+
+.tcard-role {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vivid);
+  margin-bottom: 10px;
+}
+
+.tcard p {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+@media (max-width: 1000px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .tcard {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+
+  .tcard-photo {
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .tcard h3 {
+    font-size: 17px;
+  }
+}
+
+/* ── Footer address ── */
+.foot-address {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(219, 180, 253, 0.08);
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.75;
+  color: rgba(219, 180, 253, 0.38);
+}
+
+@media (max-width: 760px) {
+  .foot-address {
+    margin-top: 14px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+}
