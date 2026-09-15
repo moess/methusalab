@@ -554,7 +554,7 @@ export default function Home() {
       <nav className="overlay" id="overlay">
         <a href="#nutzen" className="serif" onClick={closeMenu}>Nutzen</a>
         <a href="#leistungen" className="serif" onClick={closeMenu}>Leistungen</a>
-        <a href="#usecase" className="serif" onClick={closeMenu}>Use Case</a>
+        <a href="#usecase" className="serif" onClick={closeMenu}>Use Cases</a>
         <a href="#arbeitsweise" className="serif" onClick={closeMenu}>Arbeitsweise</a>
         <a href="#team" className="serif" onClick={closeMenu}>Team</a>
         <a href="#contact" className="serif" onClick={closeMenu}>Kontakt</a>
@@ -766,31 +766,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* USE CASE */}
+      {/* USE CASES */}
       <section id="usecase">
         <div className="wrap">
           <div className="sec-head">
-            <span className="eyebrow">Use Case</span>
-            <h2 className="serif">KI-Redaktionssystem <span className="hl-pill">im Einsatz</span></h2>
+            <span className="eyebrow">Use Cases</span>
+            <h2 className="serif">KI-Systeme <span className="hl-pill">im Einsatz</span></h2>
           </div>
-          <div className="case-panel" data-reveal="">
-            <div className="case-main">
-              <span className="case-badge">Publishing · KI-Automatisierung</span>
-              <h3>Automatisierte Content-Produktion für einen deutschen Verlag</h3>
-              <p>Für einen Verlagskunden hat METHUSALAB ein KI-gestütztes Redaktionssystem entwickelt: Aus einem Briefing entsteht über eine Pipeline spezialisierter KI-Agenten ein recherchierter, im Haus-Stil geschriebener Artikelentwurf — inklusive Qualitätsprüfung gegen die redaktionellen Kriterien des Verlags.</p>
-              <p>Die Redaktion behält dabei die Kontrolle: Jeder Text durchläuft ein Review-Dashboard, wird redaktionell geprüft und erst nach Freigabe ins CMS übergeben. Das System ersetzt keine Redakteur:innen — es nimmt ihnen die zeitraubende Vorarbeit ab.</p>
-              <p className="case-result">Der Kernkreislauf läuft produktiv: von Briefing über Pipeline und Review bis zum publizierten Artikel — end-to-end.</p>
+
+          {/* Voiz */}
+          <article className="ucard" data-reveal="">
+            <div className="ucard-visual" style={{ background: "linear-gradient(150deg, var(--deep-indigo), var(--royal) 55%, var(--vivid))" }}>
+              <span className="ucard-mark serif">Voiz</span>
             </div>
-            <div className="case-side">
-              <span className="case-side-label">So funktioniert es</span>
-              <ol className="case-steps">
-                <li><b>Briefing</b>Thema, Ziel und Rahmen kommen aus der Redaktion</li>
-                <li><b>Agenten-Pipeline</b>Spezialisierte KI-Rollen recherchieren, strukturieren, schreiben und prüfen</li>
-                <li><b>Human Review</b>Die Redaktion prüft, korrigiert und gibt frei</li>
-                <li><b>Publikation</b>Übergabe ans CMS als fertiger Entwurf</li>
-              </ol>
+            <div className="ucard-body">
+              <span className="ucard-eyebrow">Audiobook- &amp; E-Book-Streaming · Ungarn</span>
+              <h3>Ein 4× größerer Hörbuchkatalog — mit demselben Team</h3>
+              <p>Ein Hörbuch zu produzieren dauerte über zehn Stunden: Studio, Sprecher, Schnitt, Verwaltung. Für Voiz hat das Team eine KI-Erzähler-Pipeline auf ElevenLabs entwickelt — über 1.000 KI-Stimmen mit eigenem Profil, das System zerlegt das E-Book, produziert das Audio und stellt das fertige Hörbuch in die Bibliothek. Die Redaktion wählt nur noch die passende Stimme.</p>
+              <p>Auch der Betrieb ist Teil des Cases: Drei Entwickler betreiben die gesamte Plattform — rund 40 Services von Apps bis Payments — mit Claude Code als täglichem Entwicklungswerkzeug.</p>
+              <div className="ucard-stats">
+                <div><b>4×</b><span>Katalog: 2.700 → 11.000 Titel</span></div>
+                <div><b>1–2 h</b><span>pro Hörbuch statt 10+ Stunden</span></div>
+                <div><b>3 Devs</b><span>betreiben ~40 Services</span></div>
+              </div>
             </div>
-          </div>
+          </article>
+
+          {/* Verlag */}
+          <article className="ucard ucard-flip" data-reveal="" style={{ "--d": 1 } as React.CSSProperties}>
+            <div className="ucard-visual" style={{ background: "linear-gradient(150deg, var(--royal), var(--orchid) 60%, var(--lavender))" }}>
+              <span className="ucard-mark serif">Publishing</span>
+            </div>
+            <div className="ucard-body">
+              <span className="ucard-eyebrow">Verlag · Deutschland</span>
+              <h3>KI-Redaktionssystem im Produktivbetrieb</h3>
+              <p>Aus einem Briefing entsteht über eine Pipeline spezialisierter KI-Agenten ein recherchierter, im Haus-Stil geschriebener Artikelentwurf — inklusive Qualitätsprüfung gegen die redaktionellen Kriterien des Verlags.</p>
+              <p>Die Redaktion behält die Kontrolle: Jeder Text durchläuft ein Review-Dashboard und geht erst nach Freigabe ins CMS. Das System ersetzt keine Redakteur:innen — es nimmt ihnen die zeitraubende Vorarbeit ab.</p>
+              <div className="ucard-stats">
+                <div><b>5</b><span>spezialisierte KI-Agentenrollen</span></div>
+                <div><b>100 %</b><span>Human Review vor Publikation</span></div>
+                <div><b>E2E</b><span>produktiv: Briefing bis Publikation</span></div>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 

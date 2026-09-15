@@ -2223,184 +2223,190 @@ section#clients {
 }
 
 /* ═══════════════════════════════════════════════
-   USE CASE PANEL
+   USE CASES — editorial cards
    ═══════════════════════════════════════════════ */
-.case-panel {
+.ucard {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 48px;
-  background: var(--deep-indigo);
-  color: var(--paper);
-  border-radius: 22px;
-  padding: 52px 54px;
+  grid-template-columns: 0.75fr 1.25fr;
+  background: var(--paper-3);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.ucard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px -10px rgba(122, 68, 212, 0.16);
+}
+
+.ucard + .ucard {
+  margin-top: 26px;
+}
+
+.ucard-flip .ucard-visual {
+  order: 2;
+}
+
+.ucard-visual {
   position: relative;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.case-panel::before {
+.ucard-visual::after {
   content: "";
   position: absolute;
-  top: -40%;
-  right: -20%;
-  width: 60%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(168, 108, 244, 0.35) 0%,
-    rgba(122, 68, 212, 0.18) 40%,
-    transparent 70%
-  );
-  filter: blur(30px);
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(245, 240, 235, 0.14), transparent 55%);
   pointer-events: none;
 }
 
-.case-main {
-  position: relative;
-  z-index: 1;
+.ucard-mark {
+  color: rgba(245, 240, 235, 0.92);
+  font-size: clamp(30px, 3.2vw, 44px);
+  letter-spacing: 0.01em;
 }
 
-.case-badge {
-  display: inline-block;
-  padding: 4px 13px;
-  border-radius: 999px;
-  background: rgba(219, 180, 253, 0.12);
-  border: 1px solid rgba(219, 180, 253, 0.25);
-  font-size: 12px;
+.ucard-body {
+  padding: 40px 44px 34px;
+}
+
+.ucard-eyebrow {
+  display: block;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--lavender);
-  margin-bottom: 20px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vivid);
+  margin-bottom: 10px;
 }
 
-.case-main h3 {
-  font-size: clamp(24px, 2.6vw, 34px);
+.ucard-body h3 {
+  font-size: clamp(22px, 2.3vw, 30px);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.01em;
-  margin-bottom: 18px;
-  max-width: 22ch;
+  margin-bottom: 14px;
+  max-width: 24ch;
 }
 
-.case-main p {
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(245, 240, 235, 0.78);
-  max-width: 58ch;
+.ucard-body p {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 62ch;
   text-wrap: pretty;
 }
 
-.case-main p + p {
-  margin-top: 14px;
+.ucard-body p + p {
+  margin-top: 10px;
 }
 
-.case-result {
-  margin-top: 22px !important;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: rgba(168, 108, 244, 0.12);
-  border-left: 3px solid var(--orchid);
-  color: var(--paper) !important;
-  font-weight: 600;
-  font-size: 15px !important;
+.ucard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 
-.case-side {
-  position: relative;
-  z-index: 1;
-  border-left: 1px solid rgba(219, 180, 253, 0.15);
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.ucard-stats div {
+  padding: 0 18px;
+  border-right: 1px solid var(--line);
 }
 
-.case-side-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(219, 180, 253, 0.6);
-  margin-bottom: 22px;
+.ucard-stats div:first-child {
+  padding-left: 0;
 }
 
-.case-steps {
-  list-style: none;
-  counter-reset: casestep;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.ucard-stats div:last-child {
+  border-right: none;
 }
 
-.case-steps li {
-  counter-increment: casestep;
-  position: relative;
-  padding-left: 42px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(245, 240, 235, 0.7);
-}
-
-.case-steps li::before {
-  content: counter(casestep, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 1px;
-  font-family: var(--font-serif), serif;
-  font-size: 17px;
-  color: var(--orchid);
-}
-
-.case-steps li b {
+.ucard-stats b {
   display: block;
-  font-size: 15px;
+  font-size: clamp(20px, 2vw, 26px);
   font-weight: 700;
-  color: var(--paper);
-  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.ucard-stats span {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+  display: block;
+  margin-top: 2px;
 }
 
 @media (max-width: 1024px) {
-  .case-panel {
-    gap: 36px;
-    padding: 42px 40px;
+  .ucard-body {
+    padding: 30px 32px 28px;
+  }
+
+  .ucard-visual {
+    min-height: 260px;
   }
 }
 
-@media (max-width: 900px) {
-  .case-panel {
+@media (max-width: 860px) {
+  .ucard {
     grid-template-columns: 1fr;
-    gap: 34px;
   }
 
-  .case-side {
-    border-left: none;
-    border-top: 1px solid rgba(219, 180, 253, 0.15);
-    padding-left: 0;
-    padding-top: 30px;
+  .ucard-flip .ucard-visual {
+    order: 0;
+  }
+
+  .ucard-visual {
+    min-height: 130px;
+  }
+
+  .ucard-mark {
+    font-size: 30px;
   }
 }
 
 @media (max-width: 760px) {
-  .case-panel {
-    padding: 30px 24px;
+  .ucard {
     border-radius: 16px;
   }
 
-  .case-main h3 {
-    font-size: 22px;
+  .ucard + .ucard {
+    margin-top: 16px;
   }
 
-  .case-main p {
+  .ucard-body {
+    padding: 22px 20px 20px;
+  }
+
+  .ucard-body p {
     font-size: 14px;
   }
 
-  .case-result {
-    font-size: 14px !important;
-    padding: 12px 14px;
+  .ucard-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
   }
 
-  .case-steps {
-    gap: 16px;
+  .ucard-stats div {
+    padding: 0;
+    border-right: none;
+  }
+
+  .ucard-stats b {
+    display: inline;
+    margin-right: 8px;
+  }
+
+  .ucard-stats span {
+    display: inline;
   }
 }
 
