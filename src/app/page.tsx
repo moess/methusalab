@@ -38,7 +38,7 @@ const NUTZEN_ITEMS = [
   {
     icon: "⚙",
     title: "Direkte Umsetzung möglich",
-    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von rund 30 Spezialist:innen kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
+    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von rund 30 Spezialisten kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
     tags: "Umsetzung · Team",
   },
 ];
@@ -71,7 +71,7 @@ const LEISTUNGEN = [
   {
     num: "05",
     title: "Umsetzung ermöglichen oder übernehmen",
-    desc: "Konzepte übergabefähig aufbereiten — oder mit rund 30 Spezialist:innen direkt umsetzen.",
+    desc: "Konzepte übergabefähig aufbereiten — oder mit rund 30 Spezialisten direkt umsetzen.",
     results: ["Entwicklung", "UX/UI-Design", "Automatisierungen", "API-Integrationen", "Weiterentwicklung"],
   },
   {
@@ -801,7 +801,7 @@ export default function Home() {
               <span className="ucard-eyebrow">Verlag · Deutschland</span>
               <h3>KI-Redaktionssystem im Produktivbetrieb</h3>
               <p>Aus einem Briefing entsteht über eine Pipeline spezialisierter KI-Agenten ein recherchierter, im Haus-Stil geschriebener Artikelentwurf — inklusive Qualitätsprüfung gegen die redaktionellen Kriterien des Verlags.</p>
-              <p>Die Redaktion behält die Kontrolle: Jeder Text durchläuft ein Review-Dashboard und geht erst nach Freigabe ins CMS. Das System ersetzt keine Redakteur:innen — es nimmt ihnen die zeitraubende Vorarbeit ab.</p>
+              <p>Die Redaktion behält die Kontrolle: Jeder Text durchläuft ein Review-Dashboard und geht erst nach Freigabe ins CMS. Das System ersetzt keine Redakteure — es nimmt ihnen die zeitraubende Vorarbeit ab.</p>
               <div className="ucard-stats">
                 <div><b>5</b><span>spezialisierte KI-Agentenrollen</span></div>
                 <div><b>100 %</b><span>Human Review vor Publikation</span></div>
