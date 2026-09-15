@@ -36,7 +36,7 @@ const NUTZEN_ITEMS = [
   {
     icon: "⚙",
     title: "Direkte Umsetzung möglich",
-    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von rund 30 Spezialist:innen kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
+    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von rund 30 Spezialisten kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
     tags: "Umsetzung · Team",
   },
 ];
@@ -69,7 +69,7 @@ const LEISTUNGEN = [
   {
     num: "05",
     title: "Umsetzung ermöglichen oder übernehmen",
-    desc: "Konzepte übergabefähig aufbereiten — oder mit rund 30 Spezialist:innen direkt umsetzen.",
+    desc: "Konzepte übergabefähig aufbereiten — oder mit rund 30 Spezialisten direkt umsetzen.",
     results: ["Entwicklung", "UX/UI-Design", "Automatisierungen", "API-Integrationen", "Weiterentwicklung"],
   },
   {
