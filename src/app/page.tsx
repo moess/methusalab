@@ -129,16 +129,16 @@ const AUDIENCE_CHIPS = ["Unternehmen", "Agenturen", "Verlage", "Content-Teams", 
 // Rollen und Beschreibungen sind vorläufig — bitte prüfen und anpassen
 const TEAM = [
   {
-    photo: "/assets/team/dieter_moess.webp",
-    name: "Dieter Möss",
-    role: "Produktentwickler, KI-Architekt & Senior User Experience Architect",
-    desc: "Verbindet Produktstrategie, KI-Systemarchitektur und Nutzererlebnis — von der Idee bis zum funktionierenden System.",
-  },
-  {
     photo: "/assets/team/norbert_fogarasi.webp",
     name: "Norbert Fogarasi",
     role: "Entwicklung & Architektur",
     desc: "Verantwortet Systemarchitektur, Schnittstellen und saubere Umsetzung.",
+  },
+  {
+    photo: "/assets/team/dieter_moess.webp",
+    name: "Dieter Möss",
+    role: "Produktentwickler, KI-Architekt & Senior User Experience Architect",
+    desc: "Verbindet Produktstrategie, KI-Systemarchitektur und Nutzererlebnis — von der Idee bis zum funktionierenden System.",
   },
   {
     photo: "/assets/team/laszlo_kocsis.webp",
