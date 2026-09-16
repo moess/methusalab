@@ -63,9 +63,16 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    // Lokaler Betrieb ohne Key: Anfrage nur loggen, damit das Formular testbar bleibt.
     console.log(`[analyse-anfrage] ${name} <${email}>\n${slotLines}\n${message}`);
-    return Response.json({ ok: true, delivered: false });
+    if (process.env.NODE_ENV !== "production") {
+      // Lokaler Betrieb ohne Key: Anfrage nur loggen, damit das Formular testbar bleibt.
+      return Response.json({ ok: true, delivered: false });
+    }
+    // Produktion ohne Mailversand: ehrlich scheitern statt Anfragen zu verlieren.
+    return Response.json(
+      { error: "Die Terminanfrage ist gerade nicht verfügbar. Bitte schreiben Sie uns direkt an kontakt@methusalab.de — wir melden uns umgehend." },
+      { status: 503 }
+    );
   }
 
   const resend = new Resend(apiKey);
