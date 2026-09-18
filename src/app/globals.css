@@ -1823,9 +1823,9 @@ section#clients {
   }
 
   .hc-name {
-    font-size: clamp(24px, 7vw, 36px);
+    font-size: clamp(30px, 9vw, 44px);
     margin-bottom: 16px;
-    max-width: 14ch;
+    max-width: 18ch;
   }
 
   .hc-claim {
@@ -2179,7 +2179,7 @@ section#clients {
   }
 
   .hc-name {
-    font-size: 22px;
+    font-size: 28px;
   }
 
   .hc-claim {
