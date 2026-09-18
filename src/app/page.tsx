@@ -793,7 +793,7 @@ export default function Home() {
           </article>
 
           {/* Verlag */}
-          <article className="ucard ucard-flip" data-reveal="" style={{ "--d": 1 } as React.CSSProperties}>
+          <article className="ucard" data-reveal="" style={{ "--d": 1 } as React.CSSProperties}>
             <div className="ucard-visual" style={{ background: "linear-gradient(150deg, var(--royal), var(--orchid) 60%, var(--lavender))" }}>
               <span className="ucard-mark serif">Publishing</span>
             </div>
