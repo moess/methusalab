@@ -15,10 +15,36 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
+const SITE_TITLE = "METHUSALAB — Digitale Produkt- und Workflow-Systeme";
+const SITE_DESCRIPTION =
+  "METHUSALAB entwickelt digitale Produkt- und Workflow-Systeme, die Teams im Alltag entlasten, wiederkehrende Arbeit reduzieren und aus komplexen Abläufen nutzbare Lösungen machen.";
+
 export const metadata: Metadata = {
-  title: "METHUSALAB — Digitale Produkt- und Workflow-Systeme",
-  description:
-    "METHUSALAB entwickelt digitale Produkt- und Workflow-Systeme, die Teams im Alltag entlasten, wiederkehrende Arbeit reduzieren und aus komplexen Abläufen nutzbare Lösungen machen.",
+  metadataBase: new URL("https://www.methusalab.de"),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    url: "https://www.methusalab.de",
+    siteName: "METHUSALAB",
+    locale: "de_DE",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/assets/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "METHUSALAB — Digitale Produkt- und Workflow-Systeme",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/assets/og-image.png"],
+  },
 };
 
 export default function RootLayout({
