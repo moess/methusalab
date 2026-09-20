@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/assets/og-image.png",
-        width: 1200,
-        height: 630,
+        width: 2400,
+        height: 1260,
         alt: "METHUSALAB — Digitale Produkt- und Workflow-Systeme",
       },
     ],
