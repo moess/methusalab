@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/assets/og-image.png",
+        url: "/assets/og-methusalab-v2.png",
         width: 2400,
         height: 1260,
         alt: "METHUSALAB — Digitale Produkt- und Workflow-Systeme",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/assets/og-image.png"],
+    images: ["/assets/og-methusalab-v2.png"],
   },
 };
 
