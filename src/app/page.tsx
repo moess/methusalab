@@ -38,7 +38,7 @@ const NUTZEN_ITEMS = [
   {
     icon: "⚙",
     title: "Direkte Umsetzung möglich",
-    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von rund 30 Spezialisten kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
+    desc: "Wenn gewünscht, bleibt es nicht bei der Konzeption. Mit einem Team von 15 Spezialisten kann METHUSALAB die weitere Entwicklung, Integration und Einführung übernehmen.",
     tags: "Umsetzung · Team",
   },
 ];
