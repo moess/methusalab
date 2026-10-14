@@ -2516,6 +2516,11 @@ section#clients {
   letter-spacing: 0.02em;
 }
 
+.am-row input,
+.am-row select {
+  margin-top: auto;
+}
+
 .am-opt {
   font-weight: 400;
   color: rgba(219, 180, 253, 0.45);
